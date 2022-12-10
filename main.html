@@ -14,65 +14,80 @@
 
     <html lang="en">
     <head>
-    <meta charset="utf-8">
-    <title>Epoch time convert</title>
-    <script>
-        const interval = setInterval(() => {
-        // Live epoch time
-        document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
+        <meta charset="utf-8">
+        <title>Blue Army Knife</title>
+        <script>
+            const interval = setInterval(() => {
+            // Live epoch time
+            document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
 
-        // Convert epoch time
-        var unixEpochTimeMS = parseInt(document.getElementById("unixEpochTime").value) * 1000;
-        var date = new Date(unixEpochTimeMS);
-        document.getElementById('UTC-time').innerHTML = 
-        date.getUTCFullYear() + "-" +
-        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
-        ("0" +  date.getUTCDate()).slice(-2)     + " " + 
-        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
-        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
-        ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
-        document.getElementById('ISO8601-time').innerHTML = 
-        date.getUTCFullYear() + "-" +
-        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
-        ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
-        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
-        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
-        ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
-        }, 100);
+            // Convert epoch time
+            var unixEpochTimeMS = parseInt(document.getElementById("unixEpochTime").value) * 1000;
+            var date = new Date(unixEpochTimeMS);
+            
+            document.getElementById('UTC-time').innerHTML = 
+            date.getUTCFullYear() + "-" +
+            ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+            ("0" +  date.getUTCDate()).slice(-2)     + " " + 
+            ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+            ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+            ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
+            
+            document.getElementById('ISO8601-time').innerHTML = 
+            date.getUTCFullYear() + "-" +
+            ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+            ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
+            ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+            ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+            ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
 
-        // Copy text to clipboard
-        function copyText(timeElement, cpMsg) {
-        var valueToCopy = document.getElementById(timeElement).innerHTML;
-        navigator.clipboard.writeText(valueToCopy);
-        document.getElementById(cpMsg).innerHTML = "&#9989;";
-        setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
+            // IP checker
+            document.getElementById("vt-link").innerHTML = "https://www.virustotal.com/gui/ip-address/" + document.getElementById("ipv4").value
+            document.getElementById("abuse-link").innerHTML = "https://www.abuseipdb.com/check/" + document.getElementById("ipv4").value
+            document.getElementById("lytics-link").innerHTML = "https://dnslytics.com/ip/" + document.getElementById("ipv4").value
+
+            }, 100);
+
+            // Copy text to clipboard
+            function copyText(timeElement, cpMsg) {
+            var valueToCopy = document.getElementById(timeElement).innerHTML;
+            navigator.clipboard.writeText(valueToCopy);
+            document.getElementById(cpMsg).innerHTML = "&#9989;";
+            setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
+            }
+
+            function openLink(link) {
+                var linktest = document.getElementById(link).innerHTML
+                window.open(linktest, "_blank")
+            }
+
+        </script>
+        <style>
+        body {
+            font-size: 14px;
+            background-color: #f0f0f0;
+            font-weight: 400;
+            line-height: 1.55;
+            color: #000;
         }
-    </script>
-    <style>
-    body {
-        font-size: 14px;
-        background-color: #f0f0f0;
-        font-weight: 400;
-        line-height: 1.55;
-        color: #000;
-    }
-    .container {
-        max-width: 1360px;
-        min-height: 100%;
-        width: 90%;
-        width: calc(100% - 52px);
-        margin: 0 auto;
-        background-color: #fff;
-        border: 1px solid #949494;
-        padding: 0 14px;
-        box-shadow: 0 0 12px #b4b4b4;
-        border-radius: 5px 5px 5px 5px;
-    }
-    .item {
-        margin: 10px;
-        margin-top: 0;
-    }
-    </style>
+        .container {
+            max-width: 1360px;
+            min-height: 100%;
+            width: 90%;
+            width: calc(100% - 52px);
+            margin: 10px auto;
+            background-color: #fff;
+            border: 1px solid #949494;
+            padding: 0 14px;
+            padding-bottom: 10px;
+            box-shadow: 0 0 12px #b4b4b4;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .item {
+            margin: 10px;
+            margin-top: 0;
+        }
+        </style>
     </head>
 
     <body>
@@ -82,14 +97,37 @@
                 <p>Current Epoch time: <span id="date-time"></span></p>
                 <input type="text" size="16" maxlength="20" id="unixEpochTime" placeholder="Epoch time..." value="" spellcheck="false" autocomplete="off" autofocus>
                 <p>
-                    Readable: <span id="UTC-time"></span> <span id="UTC-cpy-msg"></span>
+                    Readable: <a id="UTC-time"></a> 
                     <button type="button" onclick="copyText('UTC-time', 'UTC-cpy-msg')">Copy</button>
+                    <a id="UTC-cpy-msg"></a>
                 </p> 
                 <p>
-                    ISO 8601: <span id="ISO8601-time"></span> <span id="ISO-cpy-msg"></span>
+                    ISO 8601: <span id="ISO8601-time"></span> 
                     <button type="button" onclick="copyText('ISO8601-time', 'ISO-cpy-msg')">Copy</button>
+                    <span id="ISO-cpy-msg"></span>
                 </p> 
             </div>
         </div>
+
+        <div class="container">
+            <h1>IP checker</h1>
+            <div class="item">
+                <p>Enter an IPv4 address to get usefull links</p>
+                <input type="text" size="16" maxlength="15" id="ipv4" placeholder="IPv4 address..." value="" spellcheck="false" autocomplete="off">
+                <p>
+                    VirusTotal: <a id="vt-link"></a> 
+                    <button type="button" onclick="openLink('vt-link')">Open in new tab</button>
+                </p>
+                <p>
+                    AbuseIPDB: <a id="abuse-link"></a> 
+                    <button type="button" onclick="openLink('abuse-link')">Open in new tab</button>
+                </p>
+                <p>
+                    DNSlytics: <a id="lytics-link"></a> 
+                    <button type="button" onclick="openLink('lytics-link')">Open in new tab</button>
+                </p> 
+            </div>
+        </div>
+
     </body>
 </html>
