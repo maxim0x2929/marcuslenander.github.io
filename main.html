@@ -1,0 +1,95 @@
+<!doctype html>
+
+<!--
+    * Time convert (and how to work with timestamps and its importance)
+    * IP check'er
+    * Mail check'er
+    * Reverse?
+    * Playbooks; File, process; ip, mail, network event, http(s) without dns, windows event.
+    * Different files: macros, exe
+    * Network event: port.
+
+    (* Dark theme)
+-->
+
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Epoch time convert</title>
+    <script>
+        const interval = setInterval(() => {
+        // Live epoch time
+        document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
+
+        // Convert epoch time
+        var unixEpochTimeMS = parseInt(document.getElementById("unixEpochTime").value) * 1000;
+        var date = new Date(unixEpochTimeMS);
+        document.getElementById('UTC-time').innerHTML = 
+        date.getUTCFullYear() + "-" +
+        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+        ("0" +  date.getUTCDate()).slice(-2)     + " " + 
+        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+        ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
+        document.getElementById('ISO8601-time').innerHTML = 
+        date.getUTCFullYear() + "-" +
+        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+        ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
+        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+        ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
+        }, 100);
+
+        // Copy text to clipboard
+        function copyText(timeElement, cpMsg) {
+        var valueToCopy = document.getElementById(timeElement).innerHTML;
+        navigator.clipboard.writeText(valueToCopy);
+        document.getElementById(cpMsg).innerHTML = "&#9989;";
+        setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
+        }
+    </script>
+    <style>
+    body {
+        font-size: 14px;
+        background-color: #f0f0f0;
+        font-weight: 400;
+        line-height: 1.55;
+        color: #000;
+    }
+    .container {
+        max-width: 1360px;
+        min-height: 100%;
+        width: 90%;
+        width: calc(100% - 52px);
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #949494;
+        padding: 0 14px;
+        box-shadow: 0 0 12px #b4b4b4;
+        border-radius: 5px 5px 5px 5px;
+    }
+    .item {
+        margin: 10px;
+        margin-top: 0;
+    }
+    </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Epoch time converter</h1>
+            <div class="item">
+                <p>Current Epoch time: <span id="date-time"></span></p>
+                <input type="text" size="16" maxlength="20" id="unixEpochTime" placeholder="Epoch time..." value="" spellcheck="false" autocomplete="off" autofocus>
+                <p>
+                    Readable: <span id="UTC-time"></span> <span id="UTC-cpy-msg"></span>
+                    <button type="button" onclick="copyText('UTC-time', 'UTC-cpy-msg')">Copy</button>
+                </p> 
+                <p>
+                    ISO 8601: <span id="ISO8601-time"></span> <span id="ISO-cpy-msg"></span>
+                    <button type="button" onclick="copyText('ISO8601-time', 'ISO-cpy-msg')">Copy</button>
+                </p> 
+            </div>
+        </div>
+    </body>
+</html>
