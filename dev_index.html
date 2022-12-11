@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+    <head>
+        <style>
+            * {
+                box-sizing: border-box;
+                font-family: "Lato", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
+            #main {
+                display: flex;
+                flex: 1;
+            }
+            #main > article {
+                flex: 1;
+            }
+            #main > nav {
+                width: 150px;
+                order: -1;
+                background: beige;
+                overflow-x: hidden;
+                margin: 0;
+                padding: 0;
+            }
+
+
+
+            #main > nav > a, #main > nav > .sub-nav > a{
+                padding: 6px 8px 6px 0px;
+                text-decoration: none;
+                color: #818181;
+                display: block;
+                width: 100%;
+                padding-left: 20px;
+            }
+            #main > nav > .sub-nav {
+                display: none;
+                padding-left: 10px;
+            }
+            .sub-nav {
+                margin: 0;
+                background-color: #262626;
+            }
+
+
+            header {
+                height: 10vh;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            }
+            footer {
+                height: 5vh;
+            }
+            header, footer {
+                background: burlywood;
+            }
+            header, footer, article, nav {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <header>Header</header>
+        <div id="main">
+            <article>Article</article>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#clients">Clients</a>
+                <a href='#contact' onclick="toggleSubNav('sub-nav-contact')">Contact</a>
+                <div class="sub-nav" id="sub-nav-contact">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+                <a href="#contact">Search</a>
+            </nav>
+        </div>
+        <footer>Footer This is not an approved by Yuki</footer>
+    
+        <script>
+            function toggleSubNav(subNav) {
+                console.log(subNav)
+                var dropdownContent = document.getElementById(subNav);
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            }
+        </script>
+
+    </body>
+</html>
