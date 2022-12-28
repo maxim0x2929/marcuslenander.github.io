@@ -1,43 +1,54 @@
 <!DOCTYPE html>
+<!--
+    * Time convert (and how to work with timestamps and its importance)
+    * IP check'er
+    * Mail check'er
+    * Reverse guide?
+    * Playbooks; File, process; ip, mail, network event, http(s) without dns, windows event.
+        *  Different files: macros, exe
+        * Network event: port.
+
+    (* Dark theme)
+-->
     <head>
         <script>
             const interval = setInterval(() => {
-            // Live epoch time
-            document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
+                // Live epoch time
+                document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
 
-            // Convert epoch time
-            var unixEpochTimeMS = parseInt(document.getElementById("unixEpochTime").value) * 1000;
-            var date = new Date(unixEpochTimeMS);
-            
-            document.getElementById('UTC-time').innerHTML = 
-            date.getUTCFullYear() + "-" +
-            ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
-            ("0" +  date.getUTCDate()).slice(-2)     + " " + 
-            ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
-            ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
-            ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
-            
-            document.getElementById('ISO8601-time').innerHTML = 
-            date.getUTCFullYear() + "-" +
-            ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
-            ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
-            ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
-            ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
-            ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
+                // Convert epoch time
+                var unixEpochTimeMS = parseInt(document.getElementById("unixEpochTime").value) * 1000;
+                var date = new Date(unixEpochTimeMS);
+                
+                document.getElementById('UTC-time').innerHTML = 
+                date.getUTCFullYear() + "-" +
+                ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+                ("0" +  date.getUTCDate()).slice(-2)     + " " + 
+                ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+                ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+                ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
+                
+                document.getElementById('ISO8601-time').innerHTML = 
+                date.getUTCFullYear() + "-" +
+                ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+                ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
+                ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+                ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+                ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
 
-            // IP checker
-            document.getElementById("vt-link").innerHTML = "https://www.virustotal.com/gui/ip-address/" + document.getElementById("ipv4").value
-            document.getElementById("abuse-link").innerHTML = "https://www.abuseipdb.com/check/" + document.getElementById("ipv4").value
-            document.getElementById("lytics-link").innerHTML = "https://dnslytics.com/ip/" + document.getElementById("ipv4").value
+                // IP checker
+                document.getElementById("vt-link").innerHTML = "https://www.virustotal.com/gui/ip-address/" + document.getElementById("ipv4").value
+                document.getElementById("abuse-link").innerHTML = "https://www.abuseipdb.com/check/" + document.getElementById("ipv4").value
+                document.getElementById("lytics-link").innerHTML = "https://dnslytics.com/ip/" + document.getElementById("ipv4").value
 
             }, 100);
 
             // Copy text to clipboard
             function copyText(timeElement, cpMsg) {
-            var valueToCopy = document.getElementById(timeElement).innerHTML;
-            navigator.clipboard.writeText(valueToCopy);
-            document.getElementById(cpMsg).innerHTML = "&#9989;";
-            setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
+                var valueToCopy = document.getElementById(timeElement).innerHTML;
+                navigator.clipboard.writeText(valueToCopy);
+                document.getElementById(cpMsg).innerHTML = "&#9989;";
+                setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
             }
 
             function openLink(link) {
@@ -45,6 +56,26 @@
                 window.open(linktest, "_blank")
             }
 
+            var pagePointer = "home"
+            function switchPage(page) {
+                if (page !== pagePointer) {
+                    var pageToDisplay = document.getElementById(page);
+                    var currentPage = document.getElementById(pagePointer);
+                    currentPage.style.display = "none";
+                    pageToDisplay.style.display = "block";
+                    pagePointer = page;
+                }
+            }
+
+            function toggleSubNav(subNav) {
+                console.log(subNav)
+                var dropdownContent = document.getElementById(subNav);
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            }
         </script>
         <style>
             * {
@@ -75,9 +106,10 @@
                 width: 150px;
                 order: -1;
                 background: #212121;
+                border-right: solid gray 1px;
                 overflow-x: hidden;
                 margin: 0;
-                padding: 0;
+                padding: 20px 0px 0px 0px;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             }
 
@@ -96,11 +128,13 @@
                 background-color: #1784c7; 
             }
 
+            #main > nav > .sub-nav > a {
+                font-size: 18px;
+            }
+
             #main > nav > .sub-nav {
                 display: none;
                 padding-left: 10px;
-            }
-            .sub-nav {
                 margin: 0;
             }
 
@@ -121,14 +155,14 @@
                 margin-top: 0;
             }
 
-
             header {
-                height: 10vh;
+                height: 8vh;
                 color: #1784c7;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             }
             footer {
                 height: 5vh;
+                font-size: 12px;
             }
             header, footer {
                 background: #0a0a0a;
@@ -147,9 +181,9 @@
             }
 
             #home {
-                display: contents;
+                display: block;
             }
-            #timeconverter {
+            #epoch, #ip-checker {
                 display: none;
             }
         </style>
@@ -159,9 +193,9 @@
         <div id="main">
             <article>
                 <div class="container" id="home">
-                    
+                    <p> THIS IS THE HOMEPAGE </p>
                 </div>
-                <div class="container" id="timeconverter">
+                <div class="container" id="epoch">
                     <h1>Epoch time converter</h1>
                     <div class="item">
                         <p>Current Epoch time: <span id="date-time"></span></p>
@@ -178,33 +212,42 @@
                         </p> 
                     </div>
                 </div>
+                <div class="container" id="ip-checker">
+                    <h1>IP checker</h1>
+                    <div class="item">
+                        <p>Enter an IPv4 address to get usefull links</p>
+                        <input type="text" size="16" maxlength="15" id="ipv4" placeholder="IPv4 address..." value="" spellcheck="false" autocomplete="off">
+                        <p>
+                            VirusTotal: <a id="vt-link"></a> 
+                            <button type="button" onclick="openLink('vt-link')">Open in new tab</button>
+                        </p>
+                        <p>
+                            AbuseIPDB: <a id="abuse-link"></a> 
+                            <button type="button" onclick="openLink('abuse-link')">Open in new tab</button>
+                        </p>
+                        <p>
+                            DNSlytics: <a id="lytics-link"></a> 
+                            <button type="button" onclick="openLink('lytics-link')">Open in new tab</button>
+                        </p> 
+                    </div>
+                </div>
+        
             </article>
             <nav>
-                <a href="#home">Home</a>
-                <a href="#epoch">Epoch time</a>
-                <a href="#ip-checker">IP checker</a>
-                <a href='#contact' onclick="toggleSubNav('sub-nav-contact')">Contact</a>
-                <div class="sub-nav" id="sub-nav-contact">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
+                <a href="#home" onclick="switchPage('home')">Home</a>
+                <a href="#epoch" onclick="switchPage('epoch')">Epoch time</a>
+                <a href="#ip-checker" onclick="switchPage('ip-checker')">IP checker</a>
+                <a href='#playbooks' onclick="toggleSubNav('sub-nav-playbooks')">Playbooks</a>
+                <div class="sub-nav" id="sub-nav-playbooks">
+                    <a href="#">IP address</a>
+                    <a href="#">File</a>
+                    <a href="#">Process</a>
+                    <a href="#">Mail</a>
                 </div>
-                <a href="#contact">Search</a>
             </nav>
         </div>
-        <footer>Footer This is not an approved by Yuki</footer>
-    
-        <script>
-            function toggleSubNav(subNav) {
-                console.log(subNav)
-                var dropdownContent = document.getElementById(subNav);
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            }
-        </script>
-
+        <footer>
+            <a href="https://github.com/MarcusLenander" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </footer>
     </body>
 </html>
