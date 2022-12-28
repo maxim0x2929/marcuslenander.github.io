@@ -1,21 +1,5 @@
-<!doctype html>
-
-<!--
-    * Time convert (and how to work with timestamps and its importance)
-    * IP check'er
-    * Mail check'er
-    * Reverse?
-    * Playbooks; File, process; ip, mail, network event, http(s) without dns, windows event.
-    * Different files: macros, exe
-    * Network event: port.
-
-    (* Dark theme)
--->
-
-    <html lang="en">
+<!DOCTYPE html>
     <head>
-        <meta charset="utf-8">
-        <title>Blue Army Knife</title>
         <script>
             const interval = setInterval(() => {
             // Live epoch time
@@ -63,71 +47,164 @@
 
         </script>
         <style>
-        body {
-            font-size: 14px;
-            background-color: #f0f0f0;
-            font-weight: 400;
-            line-height: 1.55;
-            color: #000;
-        }
-        .container {
-            max-width: 1360px;
-            min-height: 100%;
-            width: 90%;
-            width: calc(100% - 52px);
-            margin: 10px auto;
-            background-color: #fff;
-            border: 1px solid #949494;
-            padding: 0 14px;
-            padding-bottom: 10px;
-            box-shadow: 0 0 12px #b4b4b4;
-            border-radius: 5px 5px 5px 5px;
-        }
-        .item {
-            margin: 10px;
-            margin-top: 0;
-        }
+            * {
+                box-sizing: border-box;
+                font-family: "Lato", sans-serif;
+                font-size: 20px;
+                margin: 0;
+                padding: 0;
+                color: #ffffff;
+            }
+            body {
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+                margin: 0;
+                padding: 0;
+            }
+            #main {
+                display: flex;
+                flex: 1;
+            }
+            #main > article {
+                color: #818181;
+                background: #212121;
+                flex: 1;
+            }
+            #main > nav {
+                width: 150px;
+                order: -1;
+                background: #212121;
+                overflow-x: hidden;
+                margin: 0;
+                padding: 0;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            }
+
+
+
+            #main > nav > a, #main > nav > .sub-nav > a {
+                padding: 10px 8px 10px 0px;
+                text-decoration: none;
+                display: block;
+                width: 100%;
+                padding-left: 20px;
+            }
+
+            #main > nav > a:hover, #main > nav > .sub-nav > a:hover {
+                margin: 0;
+                background-color: #1784c7; 
+            }
+
+            #main > nav > .sub-nav {
+                display: none;
+                padding-left: 10px;
+            }
+            .sub-nav {
+                margin: 0;
+            }
+
+            .container {
+                max-width: 1360px;
+                min-height: 100%;
+                width: 90%;
+                width: calc(100% - 52px);
+                margin: 10px auto;
+                background-color: #333333;
+                border: 1px solid #949494;
+                padding: 0 14px;
+                padding-bottom: 10px;
+                border-radius: 10px;
+            }
+            .item {
+                margin: 10px;
+                margin-top: 0;
+            }
+
+
+            header {
+                height: 10vh;
+                color: #1784c7;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            }
+            footer {
+                height: 5vh;
+            }
+            header, footer {
+                background: #0a0a0a;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            header, footer, article, nav {
+                padding: 1em;
+            }
+
+            @media screen and (max-width: 600px) {
+                #main > nav {
+                    display: none;
+                }
+            }
+
+            #home {
+                display: contents;
+            }
+            #timeconverter {
+                display: none;
+            }
         </style>
     </head>
-
     <body>
-        <div class="container">
-            <h1>Epoch time converter</h1>
-            <div class="item">
-                <p>Current Epoch time: <span id="date-time"></span></p>
-                <input type="text" size="16" maxlength="20" id="unixEpochTime" placeholder="Epoch time..." value="" spellcheck="false" autocomplete="off" autofocus>
-                <p>
-                    Readable: <a id="UTC-time"></a> 
-                    <button type="button" onclick="copyText('UTC-time', 'UTC-cpy-msg')">Copy</button>
-                    <a id="UTC-cpy-msg"></a>
-                </p> 
-                <p>
-                    ISO 8601: <span id="ISO8601-time"></span> 
-                    <button type="button" onclick="copyText('ISO8601-time', 'ISO-cpy-msg')">Copy</button>
-                    <span id="ISO-cpy-msg"></span>
-                </p> 
-            </div>
+        <header>Blue Army Knife</header>
+        <div id="main">
+            <article>
+                <div class="container" id="home">
+                    
+                </div>
+                <div class="container" id="timeconverter">
+                    <h1>Epoch time converter</h1>
+                    <div class="item">
+                        <p>Current Epoch time: <span id="date-time"></span></p>
+                        <input type="text" size="16" maxlength="20" id="unixEpochTime" placeholder="Epoch time..." value="" spellcheck="false" autocomplete="off" autofocus>
+                        <p>
+                            Readable: <a id="UTC-time"></a> 
+                            <button type="button" onclick="copyText('UTC-time', 'UTC-cpy-msg')">Copy</button>
+                            <a id="UTC-cpy-msg"></a>
+                        </p> 
+                        <p>
+                            ISO 8601: <span id="ISO8601-time"></span> 
+                            <button type="button" onclick="copyText('ISO8601-time', 'ISO-cpy-msg')">Copy</button>
+                            <span id="ISO-cpy-msg"></span>
+                        </p> 
+                    </div>
+                </div>
+            </article>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#epoch">Epoch time</a>
+                <a href="#ip-checker">IP checker</a>
+                <a href='#contact' onclick="toggleSubNav('sub-nav-contact')">Contact</a>
+                <div class="sub-nav" id="sub-nav-contact">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+                <a href="#contact">Search</a>
+            </nav>
         </div>
-
-        <div class="container">
-            <h1>IP checker</h1>
-            <div class="item">
-                <p>Enter an IPv4 address to get usefull links</p>
-                <input type="text" size="16" maxlength="15" id="ipv4" placeholder="IPv4 address..." value="" spellcheck="false" autocomplete="off">
-                <p>
-                    VirusTotal: <a id="vt-link"></a> 
-                    <button type="button" onclick="openLink('vt-link')">Open in new tab</button>
-                </p>
-                <p>
-                    AbuseIPDB: <a id="abuse-link"></a> 
-                    <button type="button" onclick="openLink('abuse-link')">Open in new tab</button>
-                </p>
-                <p>
-                    DNSlytics: <a id="lytics-link"></a> 
-                    <button type="button" onclick="openLink('lytics-link')">Open in new tab</button>
-                </p> 
-            </div>
-        </div>
+        <footer>Footer This is not an approved by Yuki</footer>
+    
+        <script>
+            function toggleSubNav(subNav) {
+                console.log(subNav)
+                var dropdownContent = document.getElementById(subNav);
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            }
+        </script>
 
     </body>
 </html>
