@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="test.css" />
+
+    <script>
+        function toggleNav() {
+            var move = document.getElementById('nav');
+            if (move.style.display === "block") {
+                move.style.display = "none";
+            } else if (move.style.display === "none") {
+                move.style.display = "block";
+            } else {
+                move.style.setProperty('display', 'block');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <input class="nav-btn" type="checkbox" id="nav-btn" onclick="toggleNav()"/>
+        <label class="nav-icon" for="nav-btn"><span class="navicon"></span></label>
+        <a href="#">Header</a>
+    </div>
+    <div class="page">
+        <div class="nav" id="nav">
+            <ul>
+                <li><a href="#work">Our Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="article" id="home"></div>
+        <div class="article" id="time"></div>
+        <div class="article" id="ip"></div>
+    </div>
+    <div class="footer">Footer</div>
+</body>

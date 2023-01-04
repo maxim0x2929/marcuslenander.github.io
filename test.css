@@ -1,0 +1,143 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    min-height: 100vh;
+    font-family: Helvetica, sans-serif;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header {
+    flex: 1 100%;
+    width: 100%;
+    max-height: 50px;
+    text-align: center;
+    background: tomato;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page {
+    flex: 1 100%;
+    width: 100%;
+    max-width: 1300px;
+    background: deepskyblue;
+
+    display: flex;
+}
+
+.nav {
+    display: block;
+    width: 164px;
+    flex-shrink: 0;
+
+    background-color: brown;
+}
+
+/*
+    nav icon
+*/
+.nav-icon {
+    cursor: pointer;
+    display: none;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+.nav-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+.nav-icon .navicon:before,
+.nav-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+.nav-icon .navicon:before {
+    top: 5px;
+}
+.nav-icon .navicon:after {
+    top: -5px;
+}
+
+/* 
+    nav button
+*/
+.nav-btn {
+    display: none;
+}
+.nav-btn:checked ~ .nav {
+    max-height: 240px;
+}
+.nav-btn:checked ~ .nav-icon .navicon {
+    background: transparent;
+}
+.nav-btn:checked ~ .nav-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+.nav-btn:checked ~ .nav-icon .navicon:after {
+    transform: rotate(45deg);
+}
+.nav-btn:checked ~ .nav-icon:not(.steps) .navicon:before,
+.nav-btn:checked ~ .nav-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+  
+.article {
+    max-width: 1100px;
+    width: 100%;
+    border-radius: 0;
+    border: 1px solid black;
+
+    margin: 50px;
+
+    background-color: gray;
+}
+
+#time, #ip {
+    display: none;
+}
+
+.footer {
+    flex: 1 100%;
+    width: 100%;
+    max-width: 1300px;
+    max-height: 50px;
+    background: lightgreen;
+}
+
+@media (min-width: 48em) {
+    .nav {
+        display: block !important;
+        position: relative;
+    }
+    .nav-icon {
+        display: none;
+    }
+}
+
+@media (min-width: 0em) and (max-width: 48em){
+    .nav {
+        display: none;
+        position: fixed;
+        height: 100%;
+    }
+    .nav-icon {
+        display: block;
+    }
+}
