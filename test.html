@@ -13,14 +13,24 @@
                 move.style.setProperty('display', 'block');
             }
         }
+        $(document).ready(function(){
+            $('.work').click(function(){
+                alert("1")
+                $(this).addClass('active');
+            });
+        });
     </script>
 </head>
 <body>
     <div class="header">
-        <input class="nav-btn" type="checkbox" id="nav-btn" onclick="toggleNav()"/>
-        <label class="nav-icon" for="nav-btn"><span class="navicon"></span></label>
-        <a href="#">Header</a>
-    </div>
+        <div class="header-item">
+            <input class="nav-btn" type="checkbox" id="nav-btn" onclick="toggleNav()"/>
+            <label class="nav-icon" for="nav-btn"><span class="navicon"></span></label>
+        </div>
+        <div class="header-item">
+            <a href="#">Blue Armyy Knife</a>
+        </div>
+        </div>
     <div class="page">
         <div class="nav" id="nav">
             <ul>
@@ -34,5 +44,7 @@
         <div class="article" id="time"></div>
         <div class="article" id="ip"></div>
     </div>
-    <div class="footer">Footer</div>
+    <div class="footer">
+        <a> Footer </a>
+    </div>
 </body>
