@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Blue Army Knife</title>
+        <meta name="description" content="A tool for security analysts.">
+        <link rel="stylesheet" href="test.css" />
+
+        <script>
+            function toggleNav() {
+                var move = document.getElementById('nav');
+                if (move.style.display === "block") {
+                    move.style.display = "none";
+                } else if (move.style.display === "none") {
+                    move.style.display = "block";
+                } else {
+                    move.style.setProperty('display', 'block');
+                }
+            }
+            var lastActive = "";
+            function setActive(id) {
+                var active = document.getElementById(id);
+                if (lastActive !== "") {
+                    lastActive.classList.remove("active")
+                }
+                active.classList.add("active");
+                lastActive = active;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-item">
+                <input class="nav-btn" type="checkbox" id="nav-btn" onclick="toggleNav()"/>
+                <label class="nav-icon" for="nav-btn"><span class="navicon"></span></label>
+            </div>
+            <div class="header-item">
+                <a href="#home">Blue Army Knife</a>
+            </div>
+            </div>
+        <div class="page">
+            <div class="nav" id="nav">
+                <ul>
+                    <li><a href="#home" id="home" onclick="setActive('home')">Home</a></li>
+                    <br>
+                    <li><a href="#epoch-time" id="epoch-time" onclick="setActive('epoch-time')">Epoch time</a></li>
+                    <li><a href="#ip-checker" id="ip-checker" onclick="setActive('ip-checker')">IP checker</a></li>
+                    <br>
+                    <li><a href="#playbooks" id="playbooks" onclick="setActive('playbooks')">Playbooks</a></li>
+                    <div class="sub-nav" id="sub-nav">
+                        <li><a href="#playbooks/ip-address" id="playbooks-ip-address" onclick="setActive('playbooks-ip-address')">IP address</a></li>
+                        <li><a href="#playbooks/file" id="playbooks-file" onclick="setActive('playbooks-file')">File</a></li>
+                        <li><a href="#playbooks/process" id="playbooks-process" onclick="setActive('playbooks-process')">Process</a></li>
+                        <li><a href="#playbooks/mail" id="playbooks-mail" onclick="setActive('playbooks-mail')">Mail</a></li>
+                    </div>
+                </ul>
+            </div>
+            <div class="article" id="home"></div>
+            <div class="article" id="time"></div>
+            <div class="article" id="ip"></div>
+        </div>
+        <div class="footer">
+            <a> Footer </a>
+        </div>
+    </body>
+</html>

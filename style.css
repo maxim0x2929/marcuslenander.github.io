@@ -75,9 +75,14 @@ body {
     padding: 15px;
 }
 
+.sub-nav li a {
+    padding-left: 32.5px !important;
+    font-size: 16px;
+}
+
 .active {
-    background: var(--color-light-gray);
-    border-right: 5px solid blue;
+    background: var(--color-light-gray) !important;
+    border-right: 5px solid var(--color-blue) !important;
 }
 
 .nav ul li a:hover {
@@ -97,7 +102,7 @@ body {
     user-select: none;
 }
 .nav-icon .navicon {
-    background: #333;
+    background: #ffffff;
     display: block;
     height: 2px;
     position: relative;
@@ -106,7 +111,7 @@ body {
 }
 .nav-icon .navicon:before,
 .nav-icon .navicon:after {
-    background: #333;
+    background: #ffffff;
     content: '';
     display: block;
     height: 100%;
@@ -147,7 +152,7 @@ body {
 .article {
     width: 100%;
     max-width: 1100px;
-    margin: 20px;
+    margin: 20px 0 20px 20px;
     border: 1px solid var(--color-light-gray);
     border-radius: 10px;
     background-color: var(--color-light-gray);
@@ -160,7 +165,7 @@ body {
 .footer {
     flex: 1 100%;
     width: 100%;
-    max-width: 1250px;
+    max-width: 1300px;
     max-height: 50px;
     background: var(--color-medium-gray);
     border-radius: 20px 20px 0 0;
