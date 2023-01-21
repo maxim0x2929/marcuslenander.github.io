@@ -11,6 +11,7 @@
     (* Dark theme)
 -->
     <head>
+        <link rel="stylesheet" href="style.css" /> 
         <script>
             const interval = setInterval(() => {
                 // Live epoch time
@@ -77,123 +78,31 @@
                 }
             }
         </script>
-        <style>
-            * {
-                box-sizing: border-box;
-                font-family: "Lato", sans-serif;
-                font-size: 20px;
-                margin: 0;
-                padding: 0;
-                color: #ffffff;
-            }
-            body {
-                display: flex;
-                min-height: 100vh;
-                flex-direction: column;
-                margin: 0;
-                padding: 0;
-            }
-            #main {
-                display: flex;
-                flex: 1;
-            }
-            #main > article {
-                color: #818181;
-                background: #212121;
-                flex: 1;
-            }
-            #main > nav {
-                width: 150px;
-                order: -1;
-                background: #212121;
-                border-right: solid gray 1px;
-                overflow-x: hidden;
-                margin: 0;
-                padding: 20px 0px 0px 0px;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            }
-
-
-
-            #main > nav > a, #main > nav > .sub-nav > a {
-                padding: 10px 8px 10px 0px;
-                text-decoration: none;
-                display: block;
-                width: 100%;
-                padding-left: 20px;
-            }
-
-            #main > nav > a:hover, #main > nav > .sub-nav > a:hover {
-                margin: 0;
-                background-color: #1784c7; 
-            }
-
-            #main > nav > .sub-nav > a {
-                font-size: 18px;
-            }
-
-            #main > nav > .sub-nav {
-                display: none;
-                padding-left: 10px;
-                margin: 0;
-            }
-
-            .container {
-                max-width: 1360px;
-                min-height: 100%;
-                width: 90%;
-                width: calc(100% - 52px);
-                margin: 10px auto;
-                background-color: #333333;
-                border: 1px solid #949494;
-                padding: 0 14px;
-                padding-bottom: 10px;
-                border-radius: 10px;
-            }
-            .item {
-                margin: 10px;
-                margin-top: 0;
-            }
-
-            header {
-                height: 8vh;
-                color: #1784c7;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            }
-            footer {
-                height: 5vh;
-                font-size: 12px;
-            }
-            header, footer {
-                background: #0a0a0a;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            header, footer, article, nav {
-                padding: 1em;
-            }
-
-            @media screen and (max-width: 600px) {
-                #main > nav {
-                    display: none;
-                }
-            }
-
-            #home {
-                display: block;
-            }
-            #epoch, #ip-checker {
-                display: none;
-            }
-        </style>
     </head>
     <body>
-        <header>Blue Army Knife</header>
+        <header>
+            Blue Army Knife
+        </header>
         <div id="main">
+            <nav>
+                <a href="#home" onclick="switchPage('home')">Home</a>
+                <a href="#epoch" onclick="switchPage('epoch')">Epoch time</a>
+                <a href="#ip-checker" onclick="switchPage('ip-checker')">IP checker</a>
+                <br>
+                <a href='#playbooks'>Playbooks aaa</a>
+                <div class="sub-nav" id="sub-nav-playbooks">
+                    <a href="#">IP address</a>
+                    <a href="#">File</a>
+                    <a href="#">Process</a>
+                    <a href="#">Mail</a>
+                </div>
+            </nav>
             <article>
                 <div class="container" id="home">
                     <p> THIS IS THE HOMEPAGE </p>
+                    <p>aaa</p>
+                    aaaaaaa
+                    aaaa
                 </div>
                 <div class="container" id="epoch">
                     <h1>Epoch time converter</h1>
@@ -231,20 +140,7 @@
                         </p> 
                     </div>
                 </div>
-        
             </article>
-            <nav>
-                <a href="#home" onclick="switchPage('home')">Home</a>
-                <a href="#epoch" onclick="switchPage('epoch')">Epoch time</a>
-                <a href="#ip-checker" onclick="switchPage('ip-checker')">IP checker</a>
-                <a href='#playbooks' onclick="toggleSubNav('sub-nav-playbooks')">Playbooks</a>
-                <div class="sub-nav" id="sub-nav-playbooks">
-                    <a href="#">IP address</a>
-                    <a href="#">File</a>
-                    <a href="#">Process</a>
-                    <a href="#">Mail</a>
-                </div>
-            </nav>
         </div>
         <footer>
             <a href="https://github.com/MarcusLenander" target="_blank" rel="noopener noreferrer">GitHub</a>
