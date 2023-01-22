@@ -17,14 +17,33 @@
                     move.style.setProperty('display', 'block');
                 }
             }
-            var lastActive = "";
-            function setActive(id) {
-                var active = document.getElementById(id);
-                if (lastActive !== "") {
-                    lastActive.classList.remove("active")
+
+            var activeArticle = "article-home"; //
+            var activeNav = "nav-home";
+            function navUtil(id) {
+                // Hide the old article and disply the new
+                var articleId = 'article-' + id;
+                if (articleId !== activeArticle) {
+                    var articleToDisplay = document.getElementById(articleId);
+                    var currentarticle = document.getElementById(activeArticle);
+                    currentarticle.style.display = "none";
+                    articleToDisplay.style.display = "block";
+                    activeArticle = articleId;
                 }
-                active.classList.add("active");
-                lastActive = active;
+
+                if (activeArticle === "article-epoch-time") {
+                    document.getElementById("input-epoch-time").focus();
+                }
+
+                // Set the active class on the current nav item that is displayed
+                var navId = 'nav-' + id;
+                if (navId !== activeNav) {
+                    var toActive = document.getElementById(navId);
+                    var toDeActivate = document.getElementById(activeNav);
+                    toDeActivate.classList.remove("active");
+                    toActive.classList.add("active");
+                    activeNav = navId;
+                }
             }
         </script>
     </head>
@@ -41,23 +60,79 @@
         <div class="page">
             <div class="nav" id="nav">
                 <ul>
-                    <li><a href="#home" id="home" onclick="setActive('home')">Home</a></li>
+                    <li><a href="#home" class="active" id="nav-home" onclick="navUtil('home')">Home</a></li>
                     <br>
-                    <li><a href="#epoch-time" id="epoch-time" onclick="setActive('epoch-time')">Epoch time</a></li>
-                    <li><a href="#ip-checker" id="ip-checker" onclick="setActive('ip-checker')">IP checker</a></li>
+                    <li><a href="#epoch-time" id="nav-epoch-time" onclick="navUtil('epoch-time')">Epoch time</a></li>
+                    <li><a href="#ip-checker" id="nav-ip-checker" onclick="navUtil('ip-checker')">IP checker</a></li>
                     <br>
-                    <li><a href="#playbooks" id="playbooks" onclick="setActive('playbooks')">Playbooks</a></li>
+                    <li><a href="#playbooks" id="nav-playbooks" onclick="navUtil('playbooks')">Playbooks</a></li>
                     <div class="sub-nav" id="sub-nav">
-                        <li><a href="#playbooks/ip-address" id="playbooks-ip-address" onclick="setActive('playbooks-ip-address')">IP address</a></li>
-                        <li><a href="#playbooks/file" id="playbooks-file" onclick="setActive('playbooks-file')">File</a></li>
-                        <li><a href="#playbooks/process" id="playbooks-process" onclick="setActive('playbooks-process')">Process</a></li>
-                        <li><a href="#playbooks/mail" id="playbooks-mail" onclick="setActive('playbooks-mail')">Mail</a></li>
+                        <li><a href="#playbooks/ip-address" id="nav-playbooks-ip-address" onclick="navUtil('playbooks-ip-address')">IP address</a></li>
+                        <li><a href="#playbooks/file" id="nav-playbooks-file" onclick="navUtil('playbooks-file')">File</a></li>
+                        <li><a href="#playbooks/process" id="nav-playbooks-process" onclick="navUtil('playbooks-process')">Process</a></li>
+                        <li><a href="#playbooks/mail" id="nav-playbooks-mail" onclick="navUtil('playbooks-mail')">Mail</a></li>
                     </div>
                 </ul>
             </div>
-            <div class="article" id="home"></div>
-            <div class="article" id="time"></div>
-            <div class="article" id="ip"></div>
+            <div class="article" id="article-home" style="display: block;">
+                <h1>Home page</h1>
+            </div>
+            <div class="article" id="article-epoch-time">
+                <h1>Epoch timestamp converter</h1>
+                <p>Convert epoch timestamps into human-readable formats</p>
+                <p>Current Epoch time: <span id="date-time"></span></p>
+                <input type="text" size="16" maxlength="20" id="input-epoch-time" placeholder="Epoch time..." value="" spellcheck="false" autocomplete="off" autofocus>
+                <p>
+                    Readable: <a id="UTC-time"></a> 
+                    <button type="button" onclick="copyText('UTC-time', 'UTC-cpy-msg')">Copy</button>
+                    <a id="UTC-cpy-msg"></a>
+                </p> 
+                <p>
+                    ISO 8601: <span id="ISO8601-time"></span> 
+                    <button type="button" onclick="copyText('ISO8601-time', 'ISO-cpy-msg')">Copy</button>
+                    <span id="ISO-cpy-msg"></span>
+                </p> 
+                <script>
+                    const interval = setInterval(() => {
+                        // Live epoch time
+                        document.getElementById('date-time').innerHTML = Math.floor(Date.now()/1000);
+
+                        // Convert epoch time
+                        var unixEpochTimeMS = parseInt(document.getElementById("input-epoch-time").value) * 1000;
+                        var date = new Date(unixEpochTimeMS);
+                        
+                        document.getElementById('UTC-time').innerHTML = 
+                        date.getUTCFullYear() + "-" +
+                        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+                        ("0" +  date.getUTCDate()).slice(-2)     + " " + 
+                        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+                        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+                        ("0" +  date.getUTCSeconds()).slice(-2)  + " UTC";
+                        
+                        document.getElementById('ISO8601-time').innerHTML = 
+                        date.getUTCFullYear() + "-" +
+                        ("0" + (date.getUTCMonth()+1)).slice(-2) + "-" + 
+                        ("0" +  date.getUTCDate()).slice(-2)     + "T" + 
+                        ("0" +  date.getUTCHours()).slice(-2)    + ":" + 
+                        ("0" +  date.getUTCMinutes()).slice(-2)  + ":" + 
+                        ("0" +  date.getUTCSeconds()).slice(-2)  + "Z";
+                    }, 100);
+
+                    // Copy text to clipboard
+                    function copyText(timeElement, cpMsg) {
+                        var valueToCopy = document.getElementById(timeElement).innerHTML;
+                        navigator.clipboard.writeText(valueToCopy);
+                        document.getElementById(cpMsg).innerHTML = "&#9989;";
+                        setTimeout(() => {  document.getElementById(cpMsg).innerHTML = ""; }, 1000);
+                    }
+                </script>
+            </div>
+            <div class="article" id="article-ip-checker"></div>
+            <div class="article" id="article-playbooks"></div>
+            <div class="article" id="article-playbooks-ip-address"></div>
+            <div class="article" id="article-playbooks-file"></div>
+            <div class="article" id="article-playbooks-process"></div>
+            <div class="article" id="article-playbooks-mail"></div>
         </div>
         <div class="footer">
             <a> Footer </a>

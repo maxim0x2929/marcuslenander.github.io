@@ -75,16 +75,22 @@ body {
     padding: 15px;
 }
 
+.sub-nav li {
+    height: 40px;
+}
+
 .sub-nav li a {
     padding-left: 32.5px !important;
     font-size: 16px;
 }
 
+/*
+    nav hover effect
+*/
 .active {
     background: var(--color-light-gray) !important;
     border-right: 5px solid var(--color-blue) !important;
 }
-
 .nav ul li a:hover {
     background: var(--color-light-gray);
     border-right: 5px solid var(--color-blue);
@@ -158,8 +164,19 @@ body {
     background-color: var(--color-light-gray);
 }
 
-#time, #ip {
+.article > h1, p, input {
+    margin-left: 21.440px;
+}
+
+
+[id^="article-"] {
     display: none;
+}
+
+#article-epoch-time input {
+    width: 200px;
+    height: 30px;
+    border: 2px solid black;
 }
 
 .footer {
